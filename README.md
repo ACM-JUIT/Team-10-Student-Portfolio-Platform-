@@ -22,7 +22,7 @@ Customizable portfolio templates
 📦 Installation
 
 Clone the repository:
-git clone https://github.com/your-username/student-portfolio.git
+git clone https://github.com/ACM-JUIT/Team-10-Student-Portfolio-Platform-.git
 
 Install dependencies:
 npm install
