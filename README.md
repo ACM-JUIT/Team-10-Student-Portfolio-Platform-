@@ -38,11 +38,12 @@ Start the development server:
 📂 Project Structure
 
     student-portfolio/
-    ├── components/
-    ├── pages/
+    ├── build/
+    ├── src/
     ├── public/
-    ├── styles/
     ├── backend/
+        ├── models
+        ├── routes    
     ├── .env
 └── README.md
 
