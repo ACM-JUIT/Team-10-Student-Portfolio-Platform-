@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET route to fetch all portfolios (optional)
+// GET route to fetch all portfolios
 router.get("/", async (req, res) => {
   try {
     const portfolios = await Portfolio.find();
