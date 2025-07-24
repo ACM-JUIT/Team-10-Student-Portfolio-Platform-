@@ -35,6 +35,16 @@ const NavBar = ({ currentPage, setCurrentPage }) => (
       </li>
       <li className="nav-item">
         {" "}
+        {/* List item for the Featured Portfolios link */}
+        <button
+          className={`nav-link ${currentPage === "featured" ? "active" : ""}`} // Conditional class for active link styling
+          onClick={() => setCurrentPage("featured")} // Changes the current page to "featured" when clicked
+        >
+          Featured Portfolios
+        </button>
+      </li>
+      <li className="nav-item">
+        {" "}
         {/* List item for the Sample Portfolios link */}
         <button
           className={`nav-link ${currentPage === "samples" ? "active" : ""}`} // Conditional class for active link styling
