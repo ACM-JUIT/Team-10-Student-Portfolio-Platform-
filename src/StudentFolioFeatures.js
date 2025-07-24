@@ -169,7 +169,7 @@ const StudentFolioFeatures = ({ setCurrentPage }) => {
         /* Hero Features Section */
         .hero-features-section {
           padding: 100px 0;
-          background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+          background: #0f172a;
           color: white;
           position: relative;
           overflow: hidden;
