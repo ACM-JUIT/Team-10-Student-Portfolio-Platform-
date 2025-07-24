@@ -53,6 +53,14 @@ const NavBar = ({ currentPage, setCurrentPage }) => (
           Sample Portfolios
         </button>
       </li>
+      <li className="nav-item">
+  <button
+    className={`nav-link ${currentPage === "features" ? "active" : ""}`}
+    onClick={() => setCurrentPage("features")}
+  >
+    Why Choose Us
+  </button>
+</li>
     </ul>
   </nav>
 );
