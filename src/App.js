@@ -6,6 +6,7 @@ import PortfolioPreviewPage from "./PortfolioPreviewPage"; // Importing Portfoli
 import SamplePortfoliosPage from "./SamplePortfoliosPage"; // Importing SamplePortfoliosPage component
 import FeaturedPortfoliosPage from "./FeaturedPortfoliosPage"; // Importing FeaturedPortfoliosPage component
 import TempMessageBox from "./TempMessageBox"; // Importing TempMessageBox component
+import StudentFolioFeatures from "./StudentFolioFeatures"; // Add this line with your other imports
 
 function App() {
   // State to track the current page being displayed
@@ -210,6 +211,8 @@ function App() {
     switch (currentPage) {
       case "home":
         return <HomePage setCurrentPage={setCurrentPage} />;
+        case "features":
+  return <StudentFolioFeatures setCurrentPage={setCurrentPage} />;
       case "form":
         return (
           <PortfolioFormPage
