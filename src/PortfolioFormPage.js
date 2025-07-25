@@ -1,7 +1,7 @@
 import React from "react"; // Importing the React library to enable the use of React features
 
 // Functional component definition for PortfolioFormPage
-const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
+const PortfolioFormPage = ({ formData, handleChange, handleSubmit, isSubmitting }) => (
   <div className="contact-card fade-in" id="contactFormCard">
     {" "}
     {/* Main container for the portfolio form */}
@@ -33,6 +33,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
             required // Indicates that this field is required
             value={formData.firstName} // Controlled input value
             onChange={handleChange} // Event handler for input changes
+            disabled={isSubmitting} // Disable input during submission
           />
         </div>
         <div className="form-group">
@@ -48,6 +49,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
             required // Indicates that this field is required
             value={formData.lastName} // Controlled input value
             onChange={handleChange} // Event handler for input changes
+            disabled={isSubmitting} // Disable input during submission
           />
         </div>
       </div>
@@ -63,6 +65,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
           required // Indicates that this field is required
           value={formData.email} // Controlled input value
           onChange={handleChange} // Event handler for input changes
+          disabled={isSubmitting} // Disable input during submission
         />
       </div>
       <div className="form-group">
@@ -76,6 +79,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
           name="imageUrl"
           accept="image/*" // Accepts image files only
           onChange={handleChange} // Event handler for input changes
+          disabled={isSubmitting} // Disable input during submission
         />
         {formData.imageUrl && ( // Conditional rendering for image preview text
           <small className="image-preview-text">
@@ -98,6 +102,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
           required // Indicates that this field is required
           value={formData.professionalSummary} // Controlled input value
           onChange={handleChange} // Event handler for input changes
+          disabled={isSubmitting} // Disable input during submission
         ></textarea>
       </div>
       {/* Skills Section */}
@@ -117,6 +122,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
           required // Indicates that this field is required
           value={formData.skills} // Controlled input value
           onChange={handleChange} // Event handler for input changes
+          disabled={isSubmitting} // Disable input during submission
         ></textarea>
         <small className="field-hint">
           {" "}
@@ -144,6 +150,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
           required // Indicates that this field is required
           value={formData.projects} // Controlled input value
           onChange={handleChange} // Event handler for input changes
+          disabled={isSubmitting} // Disable input during submission
         ></textarea>
         <small className="field-hint">
           {" "}
@@ -171,6 +178,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
             required // Indicates that this field is required
             value={formData.college} // Controlled input value
             onChange={handleChange} // Event handler for input changes
+            disabled={isSubmitting} // Disable input during submission
           />
         </div>
         <div className="form-group">
@@ -185,6 +193,7 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
             required // Indicates that this field is required
             value={formData.degree} // Controlled input value
             onChange={handleChange} // Event handler for input changes
+            disabled={isSubmitting} // Disable input during submission
           />
         </div>
       </div>
@@ -201,12 +210,13 @@ const PortfolioFormPage = ({ formData, handleChange, handleSubmit }) => (
           required // Indicates that this field is required
           value={formData.cgpa} // Controlled input value
           onChange={handleChange} // Event handler for input changes
+          disabled={isSubmitting} // Disable input during submission
         />
       </div>
-      <button type="submit" id="submitButton">
+      <button type="submit" id="submitButton" disabled={isSubmitting}>
         {" "}
         {/* Submit button for the form */}
-        Generate Professional Portfolio
+        {isSubmitting ? "Saving Portfolio..." : "Generate Professional Portfolio"}
       </button>
     </form>
   </div>
