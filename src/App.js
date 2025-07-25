@@ -7,6 +7,7 @@ import SamplePortfoliosPage from "./SamplePortfoliosPage"; // Importing SamplePo
 import FeaturedPortfoliosPage from "./FeaturedPortfoliosPage"; // Importing FeaturedPortfoliosPage component
 import TempMessageBox from "./TempMessageBox"; // Importing TempMessageBox component
 import StudentFolioFeatures from "./StudentFolioFeatures"; // Add this line with your other imports
+import { apiService } from "./api"; // Import API service
 
 function App() {
   // State to track the current page being displayed
@@ -38,6 +39,9 @@ function App() {
   // State to manage temporary messages for user feedback
   // when the user submits the form with missing fields
   const [tempMessage, setTempMessage] = useState({ text: "", type: "" });
+
+  // State to track form submission loading
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Function to handle changes in form inputs
   const handleChange = (e) => {
@@ -78,8 +82,12 @@ function App() {
   };
 
   // Function to handle form submission
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
+    
+    // Set loading state
+    setIsSubmitting(true);
+    
     const {
       firstName,
       lastName,
@@ -108,12 +116,48 @@ function App() {
         "Please fill in all required entries. Profile image upload is optional.",
         "error"
       );
+      setIsSubmitting(false);
       return; // Exit if validation fails
     }
 
-    // If validation passes, navigate to the preview page
-    setSelectedPortfolioData(formData);
-    setCurrentPage("preview");
+    try {
+      // Save portfolio to database
+      const response = await apiService.createPortfolio(formData);
+      
+      // Display success message
+      displayTemporaryMessage(
+        "Portfolio created successfully and saved to database!",
+        "success"
+      );
+      
+      // Set the response data for preview (includes database ID)
+      setSelectedPortfolioData(response.portfolio);
+      setCurrentPage("preview");
+      
+    } catch (error) {
+      console.error("Error saving portfolio:", error);
+      
+      // Handle specific error cases
+      if (error.message.includes("already exists")) {
+        displayTemporaryMessage(
+          "A portfolio with this email already exists. Please use a different email.",
+          "error"
+        );
+      } else if (error.message.includes("Failed to create portfolio")) {
+        displayTemporaryMessage(
+          "Failed to create portfolio. Please check your input and try again.",
+          "error"
+        );
+      } else {
+        displayTemporaryMessage(
+          "An error occurred while saving your portfolio. Please try again.",
+          "error"
+        );
+      }
+    } finally {
+      // Reset loading state
+      setIsSubmitting(false);
+    }
   };
 
   // Function to handle viewing a specific portfolio
@@ -219,6 +263,7 @@ function App() {
             formData={formData}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
           />
         );
       case "preview":
